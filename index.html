@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <span class="close">&times;</span>
+        <div class="filter">
+            <input type="button" id="button" value="filtrar">
+            <div class="datas">
+                <div class="data_inicial">
+                    <label for="floatingInputGrid">Data Inicial</label>
+                    <input type="date" class="data__inicial filter-control" id="floatingInputGrid" value="" />
+                </div>
+                <div class="data_final">
+                    <label for="floatingInputGrid">Data Final</label>
+                    <input type="date" class="data__final filter-control" id="floatingInputGrid" value="">
+                </div>
+            </div>
+            <div class="content_select">
+                <div class="selects">
+                    <div class="label_select">
+                        <label for="">Número Serviço</label>
+                    </div>
+                    <div class="search_select">
+                        <input type="search" class="search" id="search_numeroOS" placeholder="Pesquise">
+                        <img id="ico_search_numeroOS" style="height:20px; padding:5px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAADZklEQVR4nO2aT0hVQRSHP9EsSkKoqKBF1CqXr0WtpNrVRqQQXAWRVkSblKJwoagZJYarpKRwm1ZEbSzIWpibNiWu3dgL0kqJECqeMY8jyHDu+2Nv5o55P5id3vM7Z86cmTnzICGhFOwEGoE+YBSYAtLAN+AzMAk8B3qAeqCa/4AtQDMwDmSApSLGLwlUA7CBNcZmoA2YLdLpqDEDNAEVrAFOANMlctweH4AUgVIp6ztfqpvgDANdQIsskVZZ+4+BT3n+/7f8fVBUAS/zOG2WxL4Cv1cDdEqRjPrmUChLogqYiBBpZvP0PwjdCFwEvkZ8fzjuIFTmmPkHwNYS2dkuy0OzM0iM9CmC/kjFLjVlwNWIGnOJGDiuiDEF6qRju2cVu4tSN7zu89PKTLiYeY1riu13kiVeaItY874wjj5TNJzydbydVap9qQpeoewC5i0d5j7hnGYl8mari4NWRcsR10bHlUNOXHuxlo0PXV9pM5ZBUw/i5I6lZ87lhDQqKbefeDmkaEr5OvhMEz/lwHdL1wVXxkaVs3gIvLZ09bsyNGUZ6iYMBixd5ozghLRl6DJh0GXpeuPK0Bdfa61Irlu6zPXcSwa0EAbdli5TE5zw0TJ0kzC4b+kyvQMnvLAMPSEM3lq6el0Z6lHa1XFj3gx+WLrOuDJWr5y6vDYiFGoVTQdcGauWF5uVxswWFCd3LT1p142RUcXgJuKhWukJODsFLtOgpJxpXcdBu6LloI+iM2MZNX37HfhlL/DT0jHmy3iTEvmnHpuS5eKsreGYJ/tUyEOlLcB0a33Qq9gewTMpeQdYKSIjPUOXXFGcN0twD4E0JTPSJitzkPbazJtRR4wMRYgyP3fZXcKCp6355WFekmOjAngUIWxBUta8IK92n29Xqn2QQRjMIW5ODiiHJZXzbbO1csJbKMDxYIKAvNIu5hE5L/f1AbnHmxffG8A9udXZFxut4NWJs0EGoUYeKpccjBGr2gcbhDJ5qJwskeNjOQ45wQZhmaPyXDVXpNNpqRuFnO2DDwJS/FLSSO2X1vUr4L3UBNPGui3NjNXc59dEEFzTERGEW6wjOpIgkATBkGQCSRCyJJlAEoQsSSaQBCFLkgkkQciSZAJJEHLeIs+zzoMwwTqj0+dvjkPlnPQzjfPb4haTQCD8BVVii08jRFgpAAAAAElFTkSuQmCC">
+                    </div>
+                    <div class="select" id="numeroOSID01">
+                        <!-- Checkbox options -->
+                    </div>
+                </div>
+                <div class="selects">
+                    <div class="label_select">
+                        <label for="">Categoria</label>
+                    </div>
+                    <div class="search_select">
+                        <input type="search" class="search" id="search_categoria" placeholder="Pesquise">
+                        <img id="ico_search_categoria" style="height:20px; padding:5px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAADZklEQVR4nO2aT0hVQRSHP9EsSkKoqKBF1CqXr0WtpNrVRqQQXAWRVkSblKJwoagZJYarpKRwm1ZEbSzIWpibNiWu3dgL0kqJECqeMY8jyHDu+2Nv5o55P5id3vM7Z86cmTnzICGhFOwEGoE+YBSYAtLAN+AzMAk8B3qAeqCa/4AtQDMwDmSApSLGLwlUA7CBNcZmoA2YLdLpqDEDNAEVrAFOANMlctweH4AUgVIp6ztfqpvgDANdQIsskVZZ+4+BT3n+/7f8fVBUAS/zOG2WxL4Cv1cDdEqRjPrmUChLogqYiBBpZvP0PwjdCFwEvkZ8fzjuIFTmmPkHwNYS2dkuy0OzM0iM9CmC/kjFLjVlwNWIGnOJGDiuiDEF6qRju2cVu4tSN7zu89PKTLiYeY1riu13kiVeaItY874wjj5TNJzydbydVap9qQpeoewC5i0d5j7hnGYl8mari4NWRcsR10bHlUNOXHuxlo0PXV9pM5ZBUw/i5I6lZ87lhDQqKbefeDmkaEr5OvhMEz/lwHdL1wVXxkaVs3gIvLZ09bsyNGUZ6iYMBixd5ozghLRl6DJh0GXpeuPK0Bdfa61Irlu6zPXcSwa0EAbdli5TE5zw0TJ0kzC4b+kyvQMnvLAMPSEM3lq6el0Z6lHa1XFj3gx+WLrOuDJWr5y6vDYiFGoVTQdcGauWF5uVxswWFCd3LT1p142RUcXgJuKhWukJODsFLtOgpJxpXcdBu6LloI+iM2MZNX37HfhlL/DT0jHmy3iTEvmnHpuS5eKsreGYJ/tUyEOlLcB0a33Qq9gewTMpeQdYKSIjPUOXXFGcN0twD4E0JTPSJitzkPbazJtRR4wMRYgyP3fZXcKCp6355WFekmOjAngUIWxBUta8IK92n29Xqn2QQRjMIW5ODiiHJZXzbbO1csJbKMDxYIKAvNIu5hE5L/f1AbnHmxffG8A9udXZFxut4NWJs0EGoUYeKpccjBGr2gcbhDJ5qJwskeNjOQ45wQZhmaPyXDVXpNNpqRuFnO2DDwJS/FLSSO2X1vUr4L3UBNPGui3NjNXc59dEEFzTERGEW6wjOpIgkATBkGQCSRCyJJlAEoQsSSaQBCFLkgkkQciSZAJJEHLeIs+zzoMwwTqj0+dvjkPlnPQzjfPb4haTQCD8BVVii08jRFgpAAAAAElFTkSuQmCC">
+                    </div>
+                    <div class="select" id="categoriaID01">
+                        <!-- Checkbox options -->
+                    </div>
+                </div>
+                <div class="selects">
+                    <div class="label_select">
+                        <label for="">Classificação</label>
+                    </div>
+                    <div class="search_select">
+                        <input type="search" class="search" id="search_classification">
+                        <img id="ico_search_classification" style="height:20px; padding:5px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAADZklEQVR4nO2aT0hVQRSHP9EsSkKoqKBF1CqXr0WtpNrVRqQQXAWRVkSblKJwoagZJYarpKRwm1ZEbSzIWpibNiWu3dgL0kqJECqeMY8jyHDu+2Nv5o55P5id3vM7Z86cmTnzICGhFOwEGoE+YBSYAtLAN+AzMAk8B3qAeqCa/4AtQDMwDmSApSLGLwlUA7CBNcZmoA2YLdLpqDEDNAEVrAFOANMlctweH4AUgVIp6ztfqpvgDANdQIsskVZZ+4+BT3n+/7f8fVBUAS/zOG2WxL4Cv1cDdEqRjPrmUChLogqYiBBpZvP0PwjdCFwEvkZ8fzjuIFTmmPkHwNYS2dkuy0OzM0iM9CmC/kjFLjVlwNWIGnOJGDiuiDEF6qRju2cVu4tSN7zu89PKTLiYeY1riu13kiVeaItY874wjj5TNJzydbydVap9qQpeoewC5i0d5j7hnGYl8mari4NWRcsR10bHlUNOXHuxlo0PXV9pM5ZBUw/i5I6lZ87lhDQqKbefeDmkaEr5OvhMEz/lwHdL1wVXxkaVs3gIvLZ09bsyNGUZ6iYMBixd5ozghLRl6DJh0GXpeuPK0Bdfa61Irlu6zPXcSwa0EAbdli5TE5zw0TJ0kzC4b+kyvQMnvLAMPSEM3lq6el0Z6lHa1XFj3gx+WLrOuDJWr5y6vDYiFGoVTQdcGauWF5uVxswWFCd3LT1p142RUcXgJuKhWukJODsFLtOgpJxpXcdBu6LloI+iM2MZNX37HfhlL/DT0jHmy3iTEvmnHpuS5eKsreGYJ/tUyEOlLcB0a33Qq9gewTMpeQdYKSIjPUOXXFGcN0twD4E0JTPSJitzkPbazJtRR4wMRYgyP3fZXcKCp6355WFekmOjAngUIWxBUta8IK92n29Xqn2QQRjMIW5ODiiHJZXzbbO1csJbKMDxYIKAvNIu5hE5L/f1AbnHmxffG8A9udXZFxut4NWJs0EGoUYeKpccjBGr2gcbhDJ5qJwskeNjOQ45wQZhmaPyXDVXpNNpqRuFnO2DDwJS/FLSSO2X1vUr4L3UBNPGui3NjNXc59dEEFzTERGEW6wjOpIgkATBkGQCSRCyJJlAEoQsSSaQBCFLkgkkQciSZAJJEHLeIs+zzoMwwTqj0+dvjkPlnPQzjfPb4haTQCD8BVVii08jRFgpAAAAAElFTkSuQmCC">
+                    </div>
+                    <div class="select" id="classificationID01">
+                        <!-- Checkbox options -->
+                    </div>
+                </div>
+                <div class="selects">
+                    <div class="label_select">
+                        <label for="">Tipo</label>
+                    </div>
+                    <div class="search_select">
+                        <input type="search" class="search" id="search_type">
+                        <img id="ico_search_type" style="height:20px; padding:5px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAADZklEQVR4nO2aT0hVQRSHP9EsSkKoqKBF1CqXr0WtpNrVRqQQXAWRVkSblKJwoagZJYarpKRwm1ZEbSzIWpibNiWu3dgL0kqJECqeMY8jyHDu+2Nv5o55P5id3vM7Z86cmTnzICGhFOwEGoE+YBSYAtLAN+AzMAk8B3qAeqCa/4AtQDMwDmSApSLGLwlUA7CBNcZmoA2YLdLpqDEDNAEVrAFOANMlctweH4AUgVIp6ztfqpvgDANdQIsskVZZ+4+BT3n+/7f8fVBUAS/zOG2WxL4Cv1cDdEqRjPrmUChLogqYiBBpZvP0PwjdCFwEvkZ8fzjuIFTmmPkHwNYS2dkuy0OzM0iM9CmC/kjFLjVlwNWIGnOJGDiuiDEF6qRju2cVu4tSN7zu89PKTLiYeY1riu13kiVeaItY874wjj5TNJzydbydVap9qQpeoewC5i0d5j7hnGYl8mari4NWRcsR10bHlUNOXHuxlo0PXV9pM5ZBUw/i5I6lZ87lhDQqKbefeDmkaEr5OvhMEz/lwHdL1wVXxkaVs3gIvLZ09bsyNGUZ6iYMBixd5ozghLRl6DJh0GXpeuPK0Bdfa61Irlu6zPXcSwa0EAbdli5TE5zw0TJ0kzC4b+kyvQMnvLAMPSEM3lq6el0Z6lHa1XFj3gx+WLrOuDJWr5y6vDYiFGoVTQdcGauWF5uVxswWFCd3LT1p142RUcXgJuKhWukJODsFLtOgpJxpXcdBu6LloI+iM2MZNX37HfhlL/DT0jHmy3iTEvmnHpuS5eKsreGYJ/tUyEOlLcB0a33Qq9gewTMpeQdYKSIjPUOXXFGcN0twD4E0JTPSJitzkPbazJtRR4wMRYgyP3fZXcKCp6355WFekmOjAngUIWxBUta8IK92n29Xqn2QQRjMIW5ODiiHJZXzbbO1csJbKMDxYIKAvNIu5hE5L/f1AbnHmxffG8A9udXZFxut4NWJs0EGoUYeKpccjBGr2gcbhDJ5qJwskeNjOQ45wQZhmaPyXDVXpNNpqRuFnO2DDwJS/FLSSO2X1vUr4L3UBNPGui3NjNXc59dEEFzTERGEW6wjOpIgkATBkGQCSRCyJJlAEoQsSSaQBCFLkgkkQciSZAJJEHLeIs+zzoMwwTqj0+dvjkPlnPQzjfPb4haTQCD8BVVii08jRFgpAAAAAElFTkSuQmCC">
+                    </div>
+                    <div class="select" id="typeID01">
+                        <!-- Checkbox options -->
+                    </div>
+                </div>
+                <div class="selects">
+                    <div class="label_select">
+                        <label for="">Status</label>
+                    </div>
+                    <div class="search_select">
+                        <input type="search" class="search" id="search_status">
+                        <img id="ico_search_status" style="height:20px; padding:5px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAADZklEQVR4nO2aT0hVQRSHP9EsSkKoqKBF1CqXr0WtpNrVRqQQXAWRVkSblKJwoagZJYarpKRwm1ZEbSzIWpibNiWu3dgL0kqJECqeMY8jyHDu+2Nv5o55P5id3vM7Z86cmTnzICGhFOwEGoE+YBSYAtLAN+AzMAk8B3qAeqCa/4AtQDMwDmSApSLGLwlUA7CBNcZmoA2YLdLpqDEDNAEVrAFOANMlctweH4AUgVIp6ztfqpvgDANdQIsskVZZ+4+BT3n+/7f8fVBUAS/zOG2WxL4Cv1cDdEqRjPrmUChLogqYiBBpZvP0PwjdCFwEvkZ8fzjuIFTmmPkHwNYS2dkuy0OzM0iM9CmC/kjFLjVlwNWIGnOJGDiuiDEF6qRju2cVu4tSN7zu89PKTLiYeY1riu13kiVeaItY874wjj5TNJzydbydVap9qQpeoewC5i0d5j7hnGYl8mari4NWRcsR10bHlUNOXHuxlo0PXV9pM5ZBUw/i5I6lZ87lhDQqKbefeDmkaEr5OvhMEz/lwHdL1wVXxkaVs3gIvLZ09bsyNGUZ6iYMBixd5ozghLRl6DJh0GXpeuPK0Bdfa61Irlu6zPXcSwa0EAbdli5TE5zw0TJ0kzC4b+kyvQMnvLAMPSEM3lq6el0Z6lHa1XFj3gx+WLrOuDJWr5y6vDYiFGoVTQdcGauWF5uVxswWFCd3LT1p142RUcXgJuKhWukJODsFLtOgpJxpXcdBu6LloI+iM2MZNX37HfhlL/DT0jHmy3iTEvmnHpuS5eKsreGYJ/tUyEOlLcB0a33Qq9gewTMpeQdYKSIjPUOXXFGcN0twD4E0JTPSJitzkPbazJtRR4wMRYgyP3fZXcKCp6355WFekmOjAngUIWxBUta8IK92n29Xqn2QQRjMIW5ODiiHJZXzbbO1csJbKMDxYIKAvNIu5hE5L/f1AbnHmxffG8A9udXZFxut4NWJs0EGoUYeKpccjBGr2gcbhDJ5qJwskeNjOQ45wQZhmaPyXDVXpNNpqRuFnO2DDwJS/FLSSO2X1vUr4L3UBNPGui3NjNXc59dEEFzTERGEW6wjOpIgkATBkGQCSRCyJJlAEoQsSSaQBCFLkgkkQciSZAJJEHLeIs+zzoMwwTqj0+dvjkPlnPQzjfPb4haTQCD8BVVii08jRFgpAAAAAElFTkSuQmCC">
+                    </div>
+                    <div class="select" id="statusID01">
+                        <!-- Checkbox options -->
+                    </div>
+                </div>
+                <div class="selects">
+                    <div class="label_select">
+                        <label for="">Técnico</label>
+                    </div>
+                    <div class="search_select">
+                        <input type="search" class="search" id="search_tecnico">
+                        <img id="ico_search_tecnico" style="height:20px; padding:5px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAADZklEQVR4nO2aT0hVQRSHP9EsSkKoqKBF1CqXr0WtpNrVRqQQXAWRVkSblKJwoagZJYarpKRwm1ZEbSzIWpibNiWu3dgL0kqJECqeMY8jyHDu+2Nv5o55P5id3vM7Z86cmTnzICGhFOwEGoE+YBSYAtLAN+AzMAk8B3qAeqCa/4AtQDMwDmSApSLGLwlUA7CBNcZmoA2YLdLpqDEDNAEVrAFOANMlctweH4AUgVIp6ztfqpvgDANdQIsskVZZ+4+BT3n+/7f8fVBUAS/zOG2WxL4Cv1cDdEqRjPrmUChLogqYiBBpZvP0PwjdCFwEvkZ8fzjuIFTmmPkHwNYS2dkuy0OzM0iM9CmC/kjFLjVlwNWIGnOJGDiuiDEF6qRju2cVu4tSN7zu89PKTLiYeY1riu13kiVeaItY874wjj5TNJzydbydVap9qQpeoewC5i0d5j7hnGYl8mari4NWRcsR10bHlUNOXHuxlo0PXV9pM5ZBUw/i5I6lZ87lhDQqKbefeDmkaEr5OvhMEz/lwHdL1wVXxkaVs3gIvLZ09bsyNGUZ6iYMBixd5ozghLRl6DJh0GXpeuPK0Bdfa61Irlu6zPXcSwa0EAbdli5TE5zw0TJ0kzC4b+kyvQMnvLAMPSEM3lq6el0Z6lHa1XFj3gx+WLrOuDJWr5y6vDYiFGoVTQdcGauWF5uVxswWFCd3LT1p142RUcXgJuKhWukJODsFLtOgpJxpXcdBu6LloI+iM2MZNX37HfhlL/DT0jHmy3iTEvmnHpuS5eKsreGYJ/tUyEOlLcB0a33Qq9gewTMpeQdYKSIjPUOXXFGcN0twD4E0JTPSJitzkPbazJtRR4wMRYgyP3fZXcKCp6355WFekmOjAngUIWxBUta8IK92n29Xqn2QQRjMIW5ODiiHJZXzbbO1csJbKMDxYIKAvNIu5hE5L/f1AbnHmxffG8A9udXZFxut4NWJs0EGoUYeKpccjBGr2gcbhDJ5qJwskeNjOQ45wQZhmaPyXDVXpNNpqRuFnO2DDwJS/FLSSO2X1vUr4L3UBNPGui3NjNXc59dEEFzTERGEW6wjOpIgkATBkGQCSRCyJJlAEoQsSSaQBCFLkgkkQciSZAJJEHLeIs+zzoMwwTqj0+dvjkPlnPQzjfPb4haTQCD8BVVii08jRFgpAAAAAElFTkSuQmCC">
+                    </div>
+                    <div class="select" id="tecnicoID01">
+                        <!-- Checkbox options -->
+                    </div>
+                </div>
+                <div class="selects">
+                    <div class="label_select">
+                        <label for="">Cliente</label>
+                    </div>
+                    <div class="search_select">
+                        <input type="search" class="search" id="search_clientName">
+                        <img style="height:20px; padding:5px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAADZklEQVR4nO2aT0hVQRSHP9EsSkKoqKBF1CqXr0WtpNrVRqQQXAWRVkSblKJwoagZJYarpKRwm1ZEbSzIWpibNiWu3dgL0kqJECqeMY8jyHDu+2Nv5o55P5id3vM7Z86cmTnzICGhFOwEGoE+YBSYAtLAN+AzMAk8B3qAeqCa/4AtQDMwDmSApSLGLwlUA7CBNcZmoA2YLdLpqDEDNAEVrAFOANMlctweH4AUgVIp6ztfqpvgDANdQIsskVZZ+4+BT3n+/7f8fVBUAS/zOG2WxL4Cv1cDdEqRjPrmUChLogqYiBBpZvP0PwjdCFwEvkZ8fzjuIFTmmPkHwNYS2dkuy0OzM0iM9CmC/kjFLjVlwNWIGnOJGDiuiDEF6qRju2cVu4tSN7zu89PKTLiYeY1riu13kiVeaItY874wjj5TNJzydbydVap9qQpeoewC5i0d5j7hnGYl8mari4NWRcsR10bHlUNOXHuxlo0PXV9pM5ZBUw/i5I6lZ87lhDQqKbefeDmkaEr5OvhMEz/lwHdL1wVXxkaVs3gIvLZ09bsyNGUZ6iYMBixd5ozghLRl6DJh0GXpeuPK0Bdfa61Irlu6zPXcSwa0EAbdli5TE5zw0TJ0kzC4b+kyvQMnvLAMPSEM3lq6el0Z6lHa1XFj3gx+WLrOuDJWr5y6vDYiFGoVTQdcGauWF5uVxswWFCd3LT1p142RUcXgJuKhWukJODsFLtOgpJxpXcdBu6LloI+iM2MZNX37HfhlL/DT0jHmy3iTEvmnHpuS5eKsreGYJ/tUyEOlLcB0a33Qq9gewTMpeQdYKSIjPUOXXFGcN0twD4E0JTPSJitzkPbazJtRR4wMRYgyP3fZXcKCp6355WFekmOjAngUIWxBUta8IK92n29Xqn2QQRjMIW5ODiiHJZXzbbO1csJbKMDxYIKAvNIu5hE5L/f1AbnHmxffG8A9udXZFxut4NWJs0EGoUYeKpccjBGr2gcbhDJ5qJwskeNjOQ45wQZhmaPyXDVXpNNpqRuFnO2DDwJS/FLSSO2X1vUr4L3UBNPGui3NjNXc59dEEFzTERGEW6wjOpIgkATBkGQCSRCyJJlAEoQsSSaQBCFLkgkkQciSZAJJEHLeIs+zzoMwwTqj0+dvjkPlnPQzjfPb4haTQCD8BVVii08jRFgpAAAAAElFTkSuQmCC">
+                    </div>
+                    <div class="select" id="clientNameID01">
+                        <!-- Checkbox options -->
+                    </div>
+                </div>
+                <div class="selects">
+                    <div class="label_select">
+                        <label for="">SLA</label>
+                    </div>
+                    <div class="search_select">
+                        <input type="search" class="search" id="search_sla">
+                        <img style="height:20px; padding:5px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAADZklEQVR4nO2aT0hVQRSHP9EsSkKoqKBF1CqXr0WtpNrVRqQQXAWRVkSblKJwoagZJYarpKRwm1ZEbSzIWpibNiWu3dgL0kqJECqeMY8jyHDu+2Nv5o55P5id3vM7Z86cmTnzICGhFOwEGoE+YBSYAtLAN+AzMAk8B3qAeqCa/4AtQDMwDmSApSLGLwlUA7CBNcZmoA2YLdLpqDEDNAEVrAFOANMlctweH4AUgVIp6ztfqpvgDANdQIsskVZZ+4+BT3n+/7f8fVBUAS/zOG2WxL4Cv1cDdEqRjPrmUChLogqYiBBpZvP0PwjdCFwEvkZ8fzjuIFTmmPkHwNYS2dkuy0OzM0iM9CmC/kjFLjVlwNWIGnOJGDiuiDEF6qRju2cVu4tSN7zu89PKTLiYeY1riu13kiVeaItY874wjj5TNJzydbydVap9qQpeoewC5i0d5j7hnGYl8mari4NWRcsR10bHlUNOXHuxlo0PXV9pM5ZBUw/i5I6lZ87lhDQqKbefeDmkaEr5OvhMEz/lwHdL1wVXxkaVs3gIvLZ09bsyNGUZ6iYMBixd5ozghLRl6DJh0GXpeuPK0Bdfa61Irlu6zPXcSwa0EAbdli5TE5zw0TJ0kzC4b+kyvQMnvLAMPSEM3lq6el0Z6lHa1XFj3gx+WLrOuDJWr5y6vDYiFGoVTQdcGauWF5uVxswWFCd3LT1p142RUcXgJuKhWukJODsFLtOgpJxpXcdBu6LloI+iM2MZNX37HfhlL/DT0jHmy3iTEvmnHpuS5eKsreGYJ/tUyEOlLcB0a33Qq9gewTMpeQdYKSIjPUOXXFGcN0twD4E0JTPSJitzkPbazJtRR4wMRYgyP3fZXcKCp6355WFekmOjAngUIWxBUta8IK92n29Xqn2QQRjMIW5ODiiHJZXzbbO1csJbKMDxYIKAvNIu5hE5L/f1AbnHmxffG8A9udXZFxut4NWJs0EGoUYeKpccjBGr2gcbhDJ5qJwskeNjOQ45wQZhmaPyXDVXpNNpqRuFnO2DDwJS/FLSSO2X1vUr4L3UBNPGui3NjNXc59dEEFzTERGEW6wjOpIgkATBkGQCSRCyJJlAEoQsSSaQBCFLkgkkQciSZAJJEHLeIs+zzoMwwTqj0+dvjkPlnPQzjfPb4haTQCD8BVVii08jRFgpAAAAAElFTkSuQmCC">
+                    </div>
+                    <div class="select" id="slaID01">
+                        <!-- Checkbox options -->
+                    </div>
+                </div>
+            </div>           
+        </div>
+    </nav>
+    <section class="push_menu">
+        <a class="open" href="#home">&#9776;</a>
+    </section>
+    <main class="main" id="home">
+        <div class="card bg-gradient-moonlit">
+            <p class="service_amount"></p>
+            <p>Quantidade de Serviços</p>
+            <!-- <span class="material-symbols-outlined md-48">
+                design_services
+                </span> -->
+            <div class="chart__box">
+                <canvas class="chart__amount">
+                    <!-- grafico Quantidade -->
+                </canvas>
+            </div>
+        </div>
+        <div class="card bg-gradient-primary">
+            <p class="mttr_amount"></p>
+            <p>MTTR</p>
+        </div>
+        <div class="card bg-gradient-danger">
+            <p class="amount_update"></p>
+            <p>Atualizado em</p>
+        </div>
+        <div class="card ">
+            <div class="chart__classification">
+                <p>Quantidade de Serviços por Classificação</p>
+                <div class="chart_card_max">
+                    <div class="canvas__classification">
+                        <canvas class="chart_classification">
+                        <!-- Lista de serviço por Categoria -->
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="chart__type">
+                <p class="">Quantidade de Serviços por Tipo</p>
+                <br>
+                <div class="chart_card_max">
+                    <div class="canvas__type">
+                        <canvas class="chart_type">
+                        <!-- Lista de serviço por Categoria -->
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="chart__status">
+                <p>Quantidade de Serviços por Status</p>
+                <br>
+                <div class="chart_card_min">
+                    <div class="canvas__status">
+                        <canvas class="chart_status">
+                        <!-- Lista de serviço por Categoria -->
+                    </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="chart__category">
+                <p>Quantidade de Serviços por Categoria</p>
+                <br>
+                <div class="chart_card_min">
+                    <div class="canvas__category">
+                        <canvas class="chart_category">
+                        <!-- Lista de serviço por Categoria -->
+                    </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="chart__services">
+                <p>Quantidade de Serviços por Data</p>
+                <br>
+                <div class="chart_card_max">
+                    <div class="canvas__services">
+                        <canvas class="chart_services" width="300" height="90">
+                    </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="chart_list">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#Serviço</th>
+                            <th>Tipo de Serviço</th>
+                            <th>Despachado</th>
+                            <th>Finalizado</th>
+                            <th>MTTR</th>
+                            <th>Cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody class="chart__list">
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <div class="card">
+
+            <div class="mapa" id="chart_map">
+                <div class="chart__map">
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- dados do grafico -->
+    <script src="/src/database/dados.js"></script>
+    <script src="/src/database/tipoAtendimento.js"></script>
+    <script src="/src/database/month.js"></script>
+
+    <!-- scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script src="/src/js/graficos.js"></script>
+    <script src="/src/js/main.js"></script>
+
+</body>
+
+</html>
