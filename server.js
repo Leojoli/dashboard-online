@@ -6,7 +6,7 @@ process.env.PWD = process.cwd();
 
 app.use(express.static(process.env.PWD + "/"));
 
-app.get("/store", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
