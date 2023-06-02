@@ -1,0 +1,37 @@
+let month = [{
+    "number": "01",
+    "month": "Janeiro"
+}, {
+    "number": "02",
+    "month": "Fevereiro"
+}, {
+    "number": "03",
+    "month": "Março"
+}, {
+    "number": "04",
+    "month": "Abril"
+}, {
+    "number": "05",
+    "month": "Maio"
+}, {
+    "number": "06",
+    "month": "Junho"
+}, {
+    "number": "07",
+    "month": "Julho"
+}, {
+    "number": "08",
+    "month": "Agosto"
+}, {
+    "number": "09",
+    "month": "Setembro"
+}, {
+    "number": "10",
+    "month": "Outubro"
+}, {
+    "number": "11",
+    "month": "Novembro"
+}, {
+    "number": "12",
+    "month": "Dezembro"
+}]

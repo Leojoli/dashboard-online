@@ -1,0 +1,376 @@
+.bg-gradient-primary {
+    background-color: #8f50ff;
+    background: linear-gradient(180deg, #8f50ff, #d13adf)!important;
+    border: 0px solid rgba(255, 255, 255, .125);
+}
+
+.bg-gradient-info {
+    background-color: #00c8ff;
+    background: linear-gradient(180deg, #00c8ff, #0072ff)!important;
+    border: 0px solid rgba(255, 255, 255, .125);
+}
+
+.bg-gradient-moonlit {
+    background: linear-gradient(180deg, #0f2027, #203a43, #2c5364)!important;
+}
+
+.bg-gradient-danger {
+    background-color: #ff5447;
+    background: linear-gradient(180deg, #ff5447, #f1076f)!important;
+    border: 0px solid rgba(255, 255, 255, .125);
+}
+
+body {
+    background-color: #080F1A;
+    color: #d5d5d5;
+    font-family: "Lato", sans-serif;
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    grid-template-rows: 60px 1fr;
+    grid-template-areas: "nav main" "nav main";
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    border: 1px solid #d5d5d5;
+    border-radius: 5px;
+}
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+ ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    border-radius: 5px;
+}
+
+.navbar {
+    position: absolute;
+    background-color: #202124ff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    height: 100%;
+    width: 0;
+    grid-area: nav;
+}
+
+.navbar span {
+    float: right;
+    font-size: 50px;
+    padding: 10px;
+    color: #dc3639;
+}
+
+.navbar span:hover {
+    float: right;
+    font-size: 50px;
+    color: #E32144;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.push_menu {
+    position: fixed;
+    font-size: 50px;
+    padding: 10px;
+    color: #E32144;
+}
+
+.push_menu a:hover {
+    color: #E32144;
+    transform: rotateX(180deg);
+}
+
+a {
+    font-size: 25px;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+p {
+    color: white;
+}
+
+.main {
+    background-color: #080F1A;
+    padding: 10px;
+    height: 100vh;
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: "service mttr update" "chart__status chart__classification chart__type" "chart__category chart__classification chart__type""chart__services chart__services chart__services" "chart_list chart_list  chart_map";
+    gap: 20px
+}
+
+.chart__box {
+    height: 10vh;
+    overflow-y: auto;
+}
+
+.chart_card_min {
+    height: 25vh;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.chart_card_max {
+    height: 60vh;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(216, 232, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.card:nth-child(1) {
+    grid-area: service;
+}
+
+.card:nth-child(2) {
+    grid-area: mttr;
+}
+
+.card:nth-child(3) {
+    grid-area: update;
+}
+
+.card:nth-child(4) {
+    grid-area: chart__classification;
+}
+
+.card:nth-child(5) {
+    grid-area: chart__type;
+}
+
+.card:nth-child(6) {
+    grid-area: chart__status;
+}
+
+.card:nth-child(7) {
+    grid-area: chart__category
+}
+
+.card:nth-child(8) {
+    grid-area: chart__services;
+}
+
+.card:nth-child(9) {
+    grid-area: chart_list;
+}
+
+.card:nth-child(10) {
+    grid-area: chart_map;
+}
+
+.canvas__classification {
+    height: 100vh;
+}
+
+.canvas__type {
+    height: 100vh;
+}
+
+.chart_type {
+    width: 10vh;
+}
+
+.chart__status {
+    font-size: 15px;
+    text-align: center
+}
+
+.chart__category {
+    font-size: 15px;
+    text-align: center
+}
+
+.chart__type {
+    font-size: 15px;
+    text-align: center
+}
+
+.chart__classification {
+    font-size: 15px;
+    text-align: center
+}
+
+.chart__services {
+    height: 50vh;
+    text-align: center
+}
+
+.canvas__status {
+    height: 30vh;
+}
+
+.canvas__category {
+    height: 30vh;
+}
+
+.canvas_services {
+    height: 30vh;
+}
+
+.chart_list {
+    height: 90vh;
+    overflow-y: auto;
+}
+
+.chart__list {
+    height: 100vh;
+}
+
+th {
+    background-color: #141920;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #141920;
+    border-bottom: 1px solid #ddd;
+}
+
+th[scope=row] {
+    background-color: #141920;
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+}
+
+tr:hover {
+    color: #888;
+}
+
+.filter {
+    margin-top: 100px;
+    padding: 10px;
+}
+
+.mapa {
+    height: 90vh;
+}
+
+.chart__map {
+    height: 100vh;
+    width: 100wh;
+}
+
+@media(max-width: 925px) {
+    .navbar {
+        position: fixed;
+        overflow-x: hidden;
+        transition: 0.5s;
+        height: 100vh;
+        width: 0;
+        grid-area: nav;
+    }
+    .main {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(10, 200px);
+        grid-template-areas: initial;
+    }
+    .card {
+        grid-area: initial !important;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+    .chart_list {
+        height: 500px;
+    }
+}
+
+.content_select {
+    padding: 10px;
+}
+
+.selects {
+    margin-bottom: 10px;
+    background-color: #ece9e9;
+    padding: 10px;
+    border-radius: 5px;
+    color: #080F1A;
+}
+
+.search_select {
+    display: flex;
+    border: 1px solid #555;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.search {
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.select {
+    width: 95%;
+    height: 100px;
+    padding: 5px 10px;
+    background-color: white;
+    overflow: auto;
+}
+
+.checkbox {
+    all: unset;
+    border: 1px solid black;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+}
+
+.checkbox:checked {
+    background-color: black;
+    width: 10px;
+    height: 10px;
+}
+
+.datas {
+    display: flex;
+}
+
+.dataTables_paginate span {
+    color: rgb(255, 255, 255);
+    float: left;
+    padding: 1px 5px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.dataTables_paginate span .active {
+    background-color: #002670;
+    color: white;
+}
+
+.dataTables_paginate span :hover:not(.active) {
+    color: #080F1A;
+    background-color: #ddd;
+}
+
+.dataTables_length {
+    display: contents;
+    width: 10%;
+}
+
+.DataTables_Table_0_filter {
+    width: 10%;
+    display: contents;
+}
